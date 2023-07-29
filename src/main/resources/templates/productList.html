@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista produktów</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+<h1 class="text-center">PRODUKTY</h1>
+<div class="animalCategory">
+  <label for="kategorie">Kategorie:</label>
+  <a href="/productList">Wszystkie produkty</a>
+  <a style="margin-left: 15px" id="kategorie"
+     th:each="cat: ${prodCategory}"
+     th:text="${cat.getDescription()}"
+     th:href="|/productList?cat=${cat}|"
+  ></a>
+</div>
+<h2 class="text-center" style="color: red" th:text="${listEmpty}"></h2>
+<table class="table table-bordered table-striped" id="employee-table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th class="text-center">Cena</th>
+    <th class="text-center">Kategoria</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${products.size()}" th:each="product: ${products}">
+    <td th:text="${product.name}">aaa</td>
+    <td class="text-center" th:text="|${product.price}zł|">aaaa</td>
+    <td class="text-center" th:text="${product.productCategory.getDescription()}">aaaaa</td>
+  </tr>
+  <tr>
+    <th class="text-end" >Całkowita kwota: </th>
+    <th class="text-center" th:unless="${totalPrice} == null? '0': 0 " th:text="|${totalPrice}zł|">0zł</th>
+    <th></th>
+  </tr>
+  </tbody>
+</table>
+</body>
+<a href="/">Powrót do strony głównej</a>
+<br>
+<a href="/addProduct">Dodaj produkt</a>
+</html>

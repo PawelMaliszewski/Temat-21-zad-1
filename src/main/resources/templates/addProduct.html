@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj zwierzę</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <a href="/">Powrót do strony głównej</a>
+  <h2>Dodaj produkt</h2>
+  <form  action="/saveProduct" th:object="${product}" method="post">
+    <div class="mb-2">
+      <label for="name" class="form-label">Nazwa produktu</label>
+      <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Wpisz nazwę produktu" required>
+    </div>
+    <div class="mb-3">
+      <label for="prodPrice" class="form-label">Wpisz cenę produktu</label>
+      <input th:field="*{price}" type="number" step=".01" class="form-control" id="prodPrice" min="0.01">
+    </div>
+    <label for="prodCat">Wybierz kategorię produktu</label>
+    <select th:field="*{productCategory}" id="prodCat" class="form-select form-select-sm" aria-label="Small select example" required>
+      <option value="">Wybierz kategorie</option>
+      <option name="Kategoria"
+              th:each="category: ${T(com.example.temat21zad1.ProductCategory).values()}"
+              th:value="${category.name()}"
+              th:text="${category.getDescription()}"
+       ></option>
+    </select>
+    <button type="submit" class="btn btn-primary">Dodaj produkt</button>
+  </form>
+</body>
+</html>

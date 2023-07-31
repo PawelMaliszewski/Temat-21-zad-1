@@ -10,15 +10,15 @@
 <h1 class="text-center">PRODUKTY</h1>
 <div class="animalCategory">
   <label for="kategorie">Kategorie:</label>
-  <a href="/productList">Wszystkie produkty</a>
+  <a href="/lista">Wszystkie produkty</a>
   <a style="margin-left: 15px" id="kategorie"
-     th:each="cat: ${prodCategory}"
-     th:text="${cat.getDescription()}"
-     th:href="|/productList?cat=${cat}|"
+     th:each="kategoria: ${T(com.example.temat21zad1.ProductCategory).values()}"
+     th:text="${kategoria.getDescription()}"
+     th:href="|/lista?kategoria=${kategoria.getLinkDescription()}|"
   ></a>
 </div>
-<h2 class="text-center" style="color: red" th:text="${listEmpty}"></h2>
-<table class="table table-bordered table-striped" id="employee-table">
+<h2 class="text-center" style="color: red" th:if="${products.isEmpty()}">Brak Produktów</h2>
+<table class="table table-bordered table-striped" id="employee-table" th:if="${!products.isEmpty()}">
   <thead>
   <tr>
     <th>Name</th>
@@ -42,5 +42,5 @@
 </body>
 <a href="/">Powrót do strony głównej</a>
 <br>
-<a href="/addProduct">Dodaj produkt</a>
+<a href="/dodajProdukt">Dodaj produkt</a>
 </html>

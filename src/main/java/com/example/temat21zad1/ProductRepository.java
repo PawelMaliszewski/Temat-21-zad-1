@@ -24,7 +24,7 @@ public class ProductRepository {
         products.add(new Product("Mydło", 2.59, ProductCategory.HOUSE_HOLD));
     }
 
-    public List<Product> getProducts() {
+    public List<Product> getAllProducts() {
         return products;
     }
 
@@ -36,13 +36,13 @@ public class ProductRepository {
         }
     }
 
-    public List<Product> listByProductCategory(ProductCategory category) {
+    public List<Product> listByProductCategory(String kategoria) {
         List<Product> listByCategory = new ArrayList<>();
-        if (category ==  null) {
+        if (kategoria == null) {
             return products;
         } else {
             for (Product product : products) {
-                if (product.getProductCategory().equals(category)) {
+                if (product.getProductCategory().getLinkDescription().equals(kategoria)) {
                     listByCategory.add(product);
                 }
             }
@@ -51,8 +51,8 @@ public class ProductRepository {
     }
 
     public double totalPrice(List<Product> products) {
-                return (double) Math.round(products.stream()
-                                    .map(Product::getPrice)
-                                    .reduce(0.00, Double::sum) * 100) / 100;
+        return (double) Math.round(products.stream()
+                                           .map(Product::getPrice)
+                                           .reduce(0.00, Double::sum) * 100) / 100;
     }
 }

@@ -9,7 +9,7 @@
 <body>
   <a href="/">Powrót do strony głównej</a>
   <h2>Dodaj produkt</h2>
-  <form  action="/saveProduct" th:object="${product}" method="post">
+  <form  action="/zapisz-produkt" th:object="${product}" method="post">
     <div class="mb-2">
       <label for="name" class="form-label">Nazwa produktu</label>
       <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Wpisz nazwę produktu" required>

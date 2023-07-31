@@ -14,9 +14,9 @@
     <a style="margin-left: 15px" id="kategorie"
        th:each="kategoria: ${T(com.example.temat21zad1.ProductCategory).values()}"
         th:text="${kategoria.getDescription()}"
-       th:href="|lista?kategoria=${kategoria}|"
+       th:href="|lista?kategoria=${kategoria.getLinkDescription()}|"
     ></a>
 </div>
-<a href="/dodajProdukt">Dodaj produkt</a>
+<a href="/dodaj-produkt">Dodaj produkt</a>
 </body>
 </html>

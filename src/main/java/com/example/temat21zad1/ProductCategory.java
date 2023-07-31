@@ -1,5 +1,7 @@
 package com.example.temat21zad1;
 
+import java.util.Arrays;
+
 public enum ProductCategory {
     FOOD("Art. spożywcze", "spozywcze"),
     HOUSE_HOLD("Art. gosp. domowego", "domowego"),
@@ -20,5 +22,14 @@ public enum ProductCategory {
 
     public String getLinkDescription() {
         return linkDescription;
+    }
+
+    static ProductCategory formLinkDescription(String category) {
+        for (ProductCategory pc : ProductCategory.values()) {
+            if (pc.linkDescription.equals(category)) {
+                return pc;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 }

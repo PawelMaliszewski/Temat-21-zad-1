@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductRepository {
@@ -36,18 +37,10 @@ public class ProductRepository {
         }
     }
 
-    public List<Product> listByProductCategory(String kategoria) {
-        List<Product> listByCategory = new ArrayList<>();
-        if (kategoria == null) {
-            return products;
-        } else {
-            for (Product product : products) {
-                if (product.getProductCategory().getLinkDescription().equals(kategoria)) {
-                    listByCategory.add(product);
-                }
-            }
-            return listByCategory;
-        }
+    public List<Product> listByProductCategory(ProductCategory productCategory) {
+        return products.stream()
+                .filter(product -> product.getProductCategory() == productCategory)
+                .collect(Collectors.toList());
     }
 
     public double totalPrice(List<Product> products) {

@@ -24,26 +24,30 @@ public class ProductController {
     }
 
     @GetMapping("/lista")
-    String productList(@RequestParam(required = false) String kategoria, Model model) {
-        List<Product> products;
-        if (kategoria != null) {
-            products = productRepository.listByProductCategory(kategoria);
-        } else {
-            products = productRepository.getAllProducts();
+    String productList(@RequestParam(required = false, name = "kategoria") String category, Model model) {
+        List<Product> products = null;
+        try {
+            if (category == null) {
+                products = productRepository.getAllProducts();
+            } else {
+                products = productRepository.listByProductCategory(ProductCategory.formLinkDescription(category));
+            }
+        } catch (IllegalArgumentException e) {
+            return "error";
         }
         model.addAttribute("products", products);
         model.addAttribute("totalPrice", productRepository.totalPrice(products));
         return "lista";
     }
 
-    @GetMapping("/dodajProdukt")
+    @GetMapping("/dodaj-produkt")
     String addProduct(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         return "dodajProdukt";
     }
 
-    @PostMapping("/saveProduct")
+    @PostMapping("/zapisz-produkt")
     String saveProduct(@ModelAttribute Product product) {
         productRepository.addProductToTheList(product);
         return "redirect:/lista?kategoria=" + product.getProductCategory().getLinkDescription();

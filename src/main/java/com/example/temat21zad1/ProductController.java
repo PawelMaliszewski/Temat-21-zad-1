@@ -25,7 +25,7 @@ public class ProductController {
 
     @GetMapping("/lista")
     String productList(@RequestParam(required = false, name = "kategoria") String category, Model model) {
-        List<Product> products = null;
+        List<Product> products;
         try {
             if (category == null) {
                 products = productRepository.getAllProducts();
